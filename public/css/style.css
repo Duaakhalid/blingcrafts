@@ -1,52 +1,62 @@
 /* homepage styling */
-.hero {
-  /* background-image: url('https://t4.ftcdn.net/jpg/05/05/70/23/360_F_505702332_xbelutTvvKdm34ClW7VPThdgT9uE8Mxs.jpg');
+.image {
+  background-image: url('https://t4.ftcdn.net/jpg/05/05/70/23/360_F_505702332_xbelutTvvKdm34ClW7VPThdgT9uE8Mxs.jpg');
   height: 100vh;
   display: flex;
+  align-items: center; 
+  justify-content: center; 
   width: 100%; 
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat;
-  */
-  background: url('https://t4.ftcdn.net/jpg/05/05/70/23/360_F_505702332_xbelutTvvKdm34ClW7VPThdgT9uE8Mxs.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-body, html {
-  margin: 0;
-  padding: 0; 
-  width: 100%;
-  height: 100%;
-}
-
-.hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 30px;
-    color:#232325;
-}
-
-.hero-content p {
-    font-size: 2rem;
-    color: #101011;
+  background-repeat: no-repeat; 
 
 }
-.navbar-brand{
-  color: rgb(34, 31, 31);
-}
-.custom-navbar {
-    background-color: #d698d6;
-    color: rgb(34, 31, 31);
+
+.hero-content {
+  text-align: center; /* Center text inside the content */
+  padding: 20px; /* Added padding for smaller screens */
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for better readability */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 600px; /* Limit the width of the content */
+  width: 90%; /* Responsive width */
 }
 
-.custom-navbar .nav-link {
-    color: #ffffff;
+/* Additional Media Queries */
+@media (max-width: 768px) {
+  .hero-content h1 {
+      font-size: 2.5rem; /* Smaller font size for smaller screens */
+  }
+
+  .hero-content p {
+      font-size: 1.5rem; /* Smaller font size for smaller screens */
+  }
 }
 
-.custom-navbar .nav-link:hover {
-    color: #000000;
+@media (min-width: 769px) and (max-width: 1200px) {
+  .hero-content h1 {
+      font-size: 3rem; /* Adjust font size for laptop view */
+  }
+
+  .hero-content p {
+      font-size: 1.8rem; /* Adjust font size for laptop view */
+  }
 }
+
+
+.bg-custom {
+  background-color: #d698d6; /* Change this to your desired color */
+  color: white; /* Optional: change text color for better contrast */
+}
+.bg-custom .nav-link {
+  color: white; /* Ensures nav links are white */
+  font-size: 110%;
+}
+
+.bg-custom .nav-link:hover {
+  color: #020202; /* Optional: Change link color on hover for better visibility */
+}
+
+
 /* contact us */
 .custom{
   margin: 0;
@@ -213,6 +223,7 @@ body, html {
   background-color: #cc80c8; 
   color: #fff; 
   border: none;
+  margin-left: 300px;
 }
 .product-container {
   text-align: center;
@@ -237,4 +248,99 @@ footer a {
 
 footer a:hover {
   color: #e6dddd; 
+}
+/* my cart */
+
+
+/* Cart Summary */
+/* Cart Container */
+.cart-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Product Layout */
+.product {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.product img {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.product-price, .product-total {
+  color: #555;
+}
+
+.product-description {
+  margin-top: 5px;
+  color: #888;
+}
+
+/* Quantity and Remove Button Styling */
+.product-quantity {
+  margin-top: 10px;
+}
+
+.quantity-input {
+  width: 50px;
+  margin-left: 10px;
+  padding: 3px;
+}
+
+.remove-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #cc80c8;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #9c6299;
+}
+
+/* Cart Summary and Checkout Button */
+.cart-summary {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.cart-total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.checkout-btn {
+  padding: 10px 10px;
+  font-size: 16px;
+  background-color: #cc80c8;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.checkout-btn:hover {
+  background-color: #9c6299;
 }

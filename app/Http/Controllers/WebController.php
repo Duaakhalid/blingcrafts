@@ -37,6 +37,29 @@ public function contact()
 }
 public function cart()
 {
-    return view('pages.cart'); 
-}  //
+    $products = [
+        [
+            'name' => 'Notebook',
+            'price' => 'Rs.345',
+            'description' => 'A5 ruled notebook',
+            'image' => 'https://uk.collinsdebden.com/cdn/shop/files/A5SpiralNotesLyingDown-3.jpg?v=1701692506'
+        ],
+        [
+            'name' => 'Ballpoint Pen',
+            'price' => 'Rs.70',
+            'description' => 'Set of ballpoint pen',
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVOJDJhOsdBYjsA41svJf3wjwykDkkZxAleg&s'
+        ],
+        [
+            'name' => 'Color Pencil',
+            'price' => 'Rs.1550',
+            'description' => 'Wooden color pencils',
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGoNelRRRN7tmvLqtGd0AO22UskTGZMXmK-Q&s'
+        ],
+    ];
+    return view('pages.cart', ['products' => $products]); 
+    // return view('cart', compact('products'));
 }
+  
+}  
+
