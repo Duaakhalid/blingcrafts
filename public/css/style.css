@@ -13,47 +13,47 @@
 }
 
 .hero-content {
-  text-align: center; /* Center text inside the content */
-  padding: 20px; /* Added padding for smaller screens */
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for better readability */
-  border-radius: 10px; /* Rounded corners */
-  max-width: 600px; /* Limit the width of the content */
-  width: 90%; /* Responsive width */
+  text-align: center; 
+  padding: 20px; 
+  background: rgba(255, 255, 255, 0.8); 
+  border-radius: 10px; 
+  max-width: 600px; 
+  width: 90%; 
 }
 
-/* Additional Media Queries */
+
 @media (max-width: 768px) {
   .hero-content h1 {
-      font-size: 2.5rem; /* Smaller font size for smaller screens */
+      font-size: 2.5rem; 
   }
 
   .hero-content p {
-      font-size: 1.5rem; /* Smaller font size for smaller screens */
+      font-size: 1.5rem; 
   }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {
   .hero-content h1 {
-      font-size: 3rem; /* Adjust font size for laptop view */
+      font-size: 3rem; 
   }
 
   .hero-content p {
-      font-size: 1.8rem; /* Adjust font size for laptop view */
+      font-size: 1.8rem; 
   }
 }
 
 
 .bg-custom {
-  background-color: #d698d6; /* Change this to your desired color */
-  color: white; /* Optional: change text color for better contrast */
+  background-color: #d698d6; 
+  color: white; 
 }
 .bg-custom .nav-link {
-  color: white; /* Ensures nav links are white */
+  color: white; 
   font-size: 110%;
 }
 
 .bg-custom .nav-link:hover {
-  color: #020202; /* Optional: Change link color on hover for better visibility */
+  color: #020202; 
 }
 
 
@@ -239,11 +239,17 @@ footer {
   background-color: #ebb8fd;
   color: white; 
   padding: 20px 0;
+  position: fixed;
+  text-align:center;
+  width: 100% ;
+  left: 0;
+  bottom: 0;
+  height: 8%;
 }
 
 footer a {
   color: #ffffff; 
-  margin: 1 10px; /
+  margin:  5px; 
 }
 
 footer a:hover {
@@ -338,9 +344,224 @@ footer a:hover {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .checkout-btn:hover {
   background-color: #9c6299;
 }
+/* Style for the Create Product container */
+.create-page{
+  background-color: #efc9fd;
+  min-height: 100vh; /* Ensure it covers the full height of the page */
+  padding-top: 20px; /* Add some space at the top */
+  padding-bottom: 20px; /* Add some space at the bottom */
+}
+.container-form {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 39px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+}
+
+.container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #555;
+}
+
+.form-control, 
+.form-control-file {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+}
+
+.btn-create {
+  background-color: #cc80c8;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color:#ffffff
+}
+
+.btn-create:hover {
+  background-color: #9c6299;
+}
+/* Edit Page Background */
+.edit-page {
+  background-color: #efc9fd; /* Light blue background */
+  min-height: 100vh; /* Ensure it covers the full height of the page */
+  padding-top: 20px; /* Add some space at the top */
+  padding-bottom: 20px; /* Add some space at the bottom */
+}
+
+.edit-container {
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+}
+
+.edit-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.edit-container label {
+  display: block;
+  font-weight: bold;
+  color: #555;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.edit-container input[type="text"],
+.edit-container input[type="number"],
+.edit-container textarea,
+.edit-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.edit-container img {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  max-width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-container button {
+  background-color: #cc80c8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-container button:hover {
+  background-color: #9c6299;
+}
+
+/* Admin Products Page Styling */
+.admin-products-page {
+  background-color: #f8f9fa; /* Light gray background */
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.btn-create {
+  display: inline-block;
+  background-color: #cc80c8;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-create:hover {
+  background-color: #9c6299;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table thead th {
+  background-color: #cc80c8;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.products-table tbody td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.product-img {
+  max-width: 80px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.btn-edit, .btn-delete {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #cc80c8;
+}
+
+.btn-edit:hover {
+  background-color: #9c6299;
+}
+
+
+
+.btn-delete {
+  background-color: #dc3545;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.btn-delete:focus {
+  outline: none;
+}
+
+
