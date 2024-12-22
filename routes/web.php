@@ -9,9 +9,12 @@ Route::get('/', [WebController::class, 'home'])->name('home');
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if (auth()->check() && auth()->user()->is_admin) {
+        return redirect()->route('admin.products.index');
+    } else {
+        return redirect()->route('home');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,5 +31,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('products', ProductController::class);
 });
 
+Route::get('/category/writing-instruments', [WebController::class, 'writingInstruments'])->name('category.writing');
+Route::get('/category/paper-products', [WebController::class, 'paperProducts'])->name('category.paper');
+Route::get('/category/desk-needs', [WebController::class, 'deskNeeds'])->name('category.desk');
+
+
+Route::get('/products', [WebController::class, 'products'])->name('products');
 require __DIR__.'/auth.php';
 ?>

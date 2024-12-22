@@ -18,7 +18,7 @@ return new class extends Migration
         $table->decimal('price', 8, 2); // To store price with 2 decimal points
         $table->string('image')->nullable(); // Image field (nullable in case no image is provided)
         $table->timestamps(); // For created_at and updated_at
-        
+    
         });
     }
 

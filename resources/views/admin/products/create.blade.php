@@ -24,6 +24,18 @@
                 <input type="number" name="price" id="price" class="form-control" placeholder="Enter product price" required>
             </div>
 
+            <!-- Add category dropdown here -->
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select name="category_id" id="category_id" class="form-control" required>
+                    <option value="">Select a category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- End category dropdown -->
+
             <div class="form-group">
                 <label for="image">Product Image</label>
                 <input type="file" name="image" id="image" class="form-control-file" required>

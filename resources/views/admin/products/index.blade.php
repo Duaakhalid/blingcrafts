@@ -12,6 +12,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Category</th> 
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->description }}</td>
                             <td>Rs.{{ number_format($product->price, 2) }}</td>
+                            <td>{{ $product->category ? $product->category->name : 'No Category' }}</td> <!-- Display Category -->
                             <td>
                                 <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-edit">Edit</a>
                                 <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:inline;">

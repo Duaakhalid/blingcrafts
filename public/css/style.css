@@ -400,72 +400,82 @@ footer a:hover {
   background-color: #9c6299;
 }
 /* Edit Page Background */
-.edit-page {
-  background-color: #efc9fd; /* Light blue background */
-  min-height: 100vh; /* Ensure it covers the full height of the page */
-  padding-top: 20px; /* Add some space at the top */
-  padding-bottom: 20px; /* Add some space at the bottom */
+body {
+  background-color: #efc9fd; /* Light purple background */
+  color: #333; /* Default text color */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.edit-container {
-  max-width: 450px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
+/* Centered and responsive product container */
+.product-container {
+  max-width: 500px; /* Smaller width for the container */
+  margin: 20px auto; /* Center horizontally with some vertical spacing */
+  padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden; /* Ensure contents stay within the box */
 }
 
-.edit-container h1 {
-  text-align: center;
-  color: #333;
+/* Ensure scrolling works */
+html, body {
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Form styling */
+.form-group {
   margin-bottom: 20px;
 }
 
-.edit-container label {
+.form-label {
   display: block;
   font-weight: bold;
-  color: #555;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #cc80c8; /* Purple label color */
 }
 
-.edit-container input[type="text"],
-.edit-container input[type="number"],
-.edit-container textarea,
-.edit-container input[type="file"] {
+.form-control {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 15px;
 }
 
-.edit-container img {
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  max-width: 100px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+textarea.form-control {
+  resize: vertical; /* Allow resizing only vertically */
 }
 
-.edit-container button {
+/* Buttons */
+.btn.btn-purple {
   background-color: #cc80c8;
-  color: white;
+  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.edit-container button:hover {
-  background-color: #9c6299;
+.btn.btn-purple:hover {
+  background-color: #9c6299; /* Darker purple on hover */
 }
+
+/* Image preview styling */
+.image-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.current-image {
+  max-width: 100px;
+  max-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
 
 /* Admin Products Page Styling */
 .admin-products-page {
@@ -563,5 +573,4 @@ h1 {
 .btn-delete:focus {
   outline: none;
 }
-
 

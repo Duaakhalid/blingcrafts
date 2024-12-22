@@ -3,97 +3,126 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    // Display a listing of the products
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get(); 
         return view('admin.products.index', compact('products'));
     }
 
-    // Show the form to create a new product
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
-    // Store a new product in the database
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image',
+            'category_id' => 'required|exists:categories,id',
         ]);
-
-        // Handle image upload if provided
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-        } else {
-            $imagePath = null;
-        }
-
-        Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'image' => $imagePath,
-        ]);
-
-        return redirect()->route('admin.products.index');
+    
+        $product = new Product();
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+    
+        // Save the uploaded image file
+        $product->image = $request->file('image')->store('products', 'public');
+    
+        $product->category_id = $request->category_id; // Save the selected category
+        $product->save();
+    
+        return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
 
-    // Show the form to edit an existing product
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    // Update the product in the database
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'description' => 'required|string',
+    //         'price' => 'required|numeric|min:0',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         'category_id' => 'required|exists:categories,id',
+    //     ]);
 
-        $product = Product::findOrFail($id);
+    //     $product = Product::findOrFail($id);
 
-        // Handle image upload if provided
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-        } else {
-            $imagePath = $product->image;
-        }
+    //     if ($request->hasFile('image')) {
+    //         if ($product->image && Storage::exists('public/' . $product->image)) {
+    //             Storage::delete('public/' . $product->image);
+    //         }
+    //         $imagePath = $request->file('image')->store('products', 'public');
+    //     } else {
+    //         $imagePath = $product->image;
+    //     }
 
-        $product->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'image' => $imagePath,
-        ]);
+    //     $product->update([
+    //         'name' => $validated['name'],
+    //         'description' => $validated['description'],
+    //         'price' => $validated['price'],
+    //         'image' => $imagePath,
+    //         'category_id' => $validated['category_id'],
+    //     ]);
 
-        return redirect()->route('admin.products.index');
+    //     return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+    // }
+
+    public function update(Request $request, Product $product)
+{
+    // Validate the request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric',
+        'image' => 'nullable|image',
+        'category_id' => 'required|exists:categories,id',
+    ]);
+
+    // Update the product's properties
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+
+    if ($request->hasFile('image')) {
+        $product->image = $request->file('image')->store('products', 'public');
     }
 
-    // Delete a product from the database
+    $product->category_id = $request->category_id;
+
+    // Save the updated product to the database
+    $product->save();
+
+    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+}
+
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+
+        if ($product->image && Storage::exists('public/' . $product->image)) {
+            Storage::delete('public/' . $product->image);
+        }
+
         $product->delete();
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');;
+
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
-    
-
-
-
-
-    
 }

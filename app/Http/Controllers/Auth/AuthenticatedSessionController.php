@@ -44,4 +44,11 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+    protected function authenticated(Request $request, $user)
+{
+    if ($user->is_admin) {
+        return redirect()->route('admin.dashboard'); // Redirect to admin panel
+    }
+    return redirect()->route('dashboard'); // Redirect to user dashboard
+}
 }
