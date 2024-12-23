@@ -91,7 +91,7 @@ class ProductController extends Controller
         'name' => 'required|string|max:255',
         'description' => 'required|string',
         'price' => 'required|numeric',
-        'image' => 'nullable|image',
+        'image' => 'nullable|image|mimes:jpg|max:2048',
         'category_id' => 'required|exists:categories,id',
     ]);
 
@@ -125,4 +125,23 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
+
+    
+    public function search(Request $request)
+{
+    // Retrieve the query string from the request
+    $searchTerm = $request->get('query'); // "query" matches the key sent by Ajax
+
+    // Search products by name or category
+    $products = Product::where('name', 'like', "%{$searchTerm}%")
+        ->orWhereHas('category', function ($query) use ($searchTerm) {
+            $query->where('name', 'like', "%{$searchTerm}%");
+        })
+        ->get();
+
+    // Return the results as a JSON response
+    return response()->json($products);
+}
+
+
 }

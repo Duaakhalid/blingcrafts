@@ -27,11 +27,27 @@
         </ul>
 
     
-        <div class="ml-auto d-flex align-items-center">
+        <!-- <div class="ml-auto d-flex align-items-center">
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" name="search">
                 <button class="btn btn-purple my-3 mr-sm-1" type="submit" style="margin-left: 0%;">Search</button>
-            </form>
+            </form> -->
+
+            <!-- <div class="search-bar-container">
+    <input type="text" id="search-bar" placeholder="Search products..." class="search-input">
+    <ul id="search-results" class="search-dropdown"></ul>
+</div> -->
+
+<div class="search-bar-container d-flex align-items-center my-2 mr-3">
+    <!-- Search Input -->
+    <input type="text" id="search-bar" placeholder="Search products..." class="form-control search-input">
+
+    <!-- Search Button -->
+    <button class="btn btn-purple ml-2" type="submit">Search</button>
+
+    <!-- Search Results Dropdown -->
+    <ul id="search-results" class="search-dropdown"></ul>
+</div>
 
             @guest
             

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="product-container">
+<div >
     <h1 class="mb-3">Our Products</h1>
     
     @foreach ($categories as $category)

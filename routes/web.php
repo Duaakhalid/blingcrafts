@@ -35,6 +35,9 @@ Route::get('/category/writing-instruments', [WebController::class, 'writingInstr
 Route::get('/category/paper-products', [WebController::class, 'paperProducts'])->name('category.paper');
 Route::get('/category/desk-needs', [WebController::class, 'deskNeeds'])->name('category.desk');
 
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+
+
 
 Route::get('/products', [WebController::class, 'products'])->name('products');
 require __DIR__.'/auth.php';
