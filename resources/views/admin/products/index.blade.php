@@ -4,6 +4,9 @@
     <div class="admin-products-page">
         <div class="admin-container">
             <h1>All Products</h1>
+            <!-- New Messages Button -->
+            <a href="{{ route('admin.messages') }}" class="btn-messages">View Messages</a>
+
             <a href="{{ route('admin.products.create') }}" class="btn-create">Create New Product</a>
             <table class="products-table">
                 <thead>

@@ -27,23 +27,25 @@
             <div class="topic-text">Send us a message</div>
             <p>If you have any queries about the products, you can send us a message from here.<br>
                  It will be a pleasure to help you.</p>
-            <form action="#">
-                <div class="input-box">
-                <label for="name">Your Name:</label>
-                    <input type="text"  id="name" placeholder="Enter your name" />
-                </div>
-                <div class="input-box">
-                <label for="email">Your Email:</label>
-                    <input type="email" placeholder="Enter your email" />
-                </div>
-                <div class="input-box message-box">
-                <label for="message">Your Message:</label>
-                    <textarea placeholder="Enter your message"></textarea>
-                </div>
-                <div class="button">
-                    <input type="submit" value="Send Now" />
-                </div>
-            </form>
+            <form action="{{ route('contact.submit') }}" method="POST">
+    @csrf
+    <div class="input-box">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+    </div>
+    <div class="input-box">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+    </div>
+    <div class="input-box message-box">
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+    </div>
+    <div class="button">
+        <input type="submit" value="Send Now" />
+    </div>
+</form>
+            
         </div>
     </div>
 </div>

@@ -1,39 +1,50 @@
-@extends('layouts.web') 
+@extends('layouts.web')
+
 @section('content')
-    <div class="cart-container">
-        <h1 style="text-align:center;">My Cart</h1>
-        
-        @foreach ($products as $product)
-            <div class="product">
-                <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
-                <div class="product-details">
-                    <div class="product-name">{{ $product['name'] }}</div>
-                    <div class="product-price">Price: {{ $product['price'] }}</div>
-                    <div class="product-description">{{ $product['description'] }}</div>
-                    
-                    <!-- Quantity Input -->
-                    <div class="product-quantity">
-                        <label for="quantity-{{ $loop->index }}">Quantity:</label>
-                        <input type="number" id="quantity-{{ $loop->index }}" name="quantity" value="1" min="1" class="quantity-input">
-                    </div>
-                    
-                    <!-- Total Price (Static calculation as requested) -->
-                    <div class="product-total">
-                        <strong>Total:</strong> <span>{{ $product['price'] }}</span>
-                    </div>
-                    
-                    <!-- Remove Button -->
-                    <button class="remove-btn">Remove Item</button>
+<div class="cart-page-container">
+    <h1 class="cart-title">My Cart</h1>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(!empty($cart) && count($cart) > 0)
+    <div class="cart-items">
+        @php $cartTotal = 0; @endphp
+        @foreach($cart as $id => $item)
+            @php $itemTotal = $item['price'] * $item['quantity']; @endphp
+            @php $cartTotal += $itemTotal; @endphp
+            <div class="cart-item">
+                <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" class="cart-item-image">
+                <div class="cart-item-info">
+                    <h2>{{ $item['name'] }}</h2>
+                    <p>Price: Rs. {{ number_format($item['price'], 2) }}</p>
+                    <form action="{{ route('cart.update', $id) }}" method="POST" class="quantity-form">
+                        @csrf
+                        @method('PUT')
+                        <label for="quantity-{{ $id }}">Quantity:</label>
+                        <input type="number" name="quantity" id="quantity-{{ $id }}" value="{{ $item['quantity'] }}" min="1">
+                        <button type="submit" class="btn-purple ">Update</button>
+                    </form>
+                    <p>Total: Rs. {{ number_format($itemTotal, 2) }}</p>
                 </div>
+                <form action="{{ route('cart.remove', $id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Remove Item</button>
+                </form>
             </div>
         @endforeach
-        
-        <!-- Static Cart Total and Checkout Button -->
-        <div class="cart-summary">
-            <div class="cart-total">
-                <strong>Cart Total:</strong> <span>1965</span> <!-- Static total -->
-            </div>
-            <button class="checkout-btn">Proceed to Checkout</button>
-        </div>
     </div>
+    <div class="cart-summary">
+        <h3>Cart Total: Rs. {{ number_format($cartTotal, 2) }}</h3>
+        <button class="btn btn-purple">Proceed to Checkout</button>
+    </div>
+    @else
+    <div class="text-center py-4" style="font-size: 19px;">
+        <b><p>Your cart is empty!</p></b>
+    </div>
+    @endif
+</div>
 @endsection

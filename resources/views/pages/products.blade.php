@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div >
+<div class= "card-page">
     <h1 class="mb-3">Our Products</h1>
     
     @foreach ($categories as $category)
@@ -16,7 +16,19 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="card-text"><strong>Rs. {{ number_format($product->price, 2) }}</strong></p>
-                            <a href="#" class="btn btn-purple">Add to Cart</a>
+                          
+                            <!-- <a href="#" class="btn btn-purple">Add to Cart</a> -->
+                            <form action="{{ route('cart.add') }}" method="POST">
+    @csrf
+    <input type="hidden" name="id" value="{{ $product->id }}">
+    <input type="hidden" name="name" value="{{ $product->name }}">
+    <input type="hidden" name="price" value="{{ $product->price }}">
+    <input type="hidden" name="image" value="{{ $product->image }}">
+    <input type="hidden" name="quantity" value="1"> <!-- Default quantity -->
+    <button type="submit" class="btn btn-purple">Add to Cart</button>
+</form>
+<!-- View Product Button -->
+<a href="{{ route('product.show', $product->id) }}" class="btn btn-info my--0  ml-2">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -25,5 +37,5 @@
     @endforeach
 
 </div>
-
+</div>
 @endsection

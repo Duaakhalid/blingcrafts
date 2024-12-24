@@ -52,38 +52,7 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $validated = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'price' => 'required|numeric|min:0',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         'category_id' => 'required|exists:categories,id',
-    //     ]);
-
-    //     $product = Product::findOrFail($id);
-
-    //     if ($request->hasFile('image')) {
-    //         if ($product->image && Storage::exists('public/' . $product->image)) {
-    //             Storage::delete('public/' . $product->image);
-    //         }
-    //         $imagePath = $request->file('image')->store('products', 'public');
-    //     } else {
-    //         $imagePath = $product->image;
-    //     }
-
-    //     $product->update([
-    //         'name' => $validated['name'],
-    //         'description' => $validated['description'],
-    //         'price' => $validated['price'],
-    //         'image' => $imagePath,
-    //         'category_id' => $validated['category_id'],
-    //     ]);
-
-    //     return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
-    // }
-
+   
     public function update(Request $request, Product $product)
 {
     // Validate the request data
@@ -141,6 +110,15 @@ class ProductController extends Controller
 
     // Return the results as a JSON response
     return response()->json($products);
+}
+
+public function show($id)
+{
+    // Fetch product from database using ID
+    $product = Product::findOrFail($id);
+
+    // Pass the product data to the view
+    return view('pages.product-detail', compact('product'));
 }
 
 

@@ -16,36 +16,47 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    document.getElementById('search-bar').addEventListener('keyup', function () {
-        const query = this.value; // Get the input value
-        const resultsContainer = document.getElementById('search-results');
+   
 
+    let debounceTimer;
+
+document.getElementById('search-bar').addEventListener('keyup', function () {
+    const query = this.value; // Get the input value
+    const resultsContainer = document.getElementById('search-results');
+
+    // Clear any existing debounce timer
+    clearTimeout(debounceTimer);
+
+    // Add a delay before making the AJAX call
+    debounceTimer = setTimeout(() => {
         if (query.length > 1) { // Only search if query length > 1
             fetch(`/search?query=${query}`, {
                 method: 'GET',
                 headers: { 'X-Requested-With': 'XMLHttpRequest' },
             })
-            .then(response => response.json())
-            .then(data => {
-                resultsContainer.innerHTML = ''; // Clear previous results
-                if (data.length > 0) {
-                    data.forEach(product => {
-                        const li = document.createElement('li');
-                        li.textContent = product.name;
-                        li.classList.add('search-result-item');
-                        li.addEventListener('click', () => {
-                            window.location.href = `/products/${product.id}`; // Redirect on click
+                .then(response => response.json())
+                .then(data => {
+                    resultsContainer.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        data.forEach(product => {
+                            const li = document.createElement('li');
+                            li.textContent = product.name;
+                            li.classList.add('search-result-item');
+                            li.addEventListener('click', () => {
+                                window.location.href = `/product/${product.id}`; // Redirect on click
+                            });
+                            resultsContainer.appendChild(li);
                         });
-                        resultsContainer.appendChild(li);
-                    });
-                } else {
-                    resultsContainer.innerHTML = '<li class="no-results">No results found</li>';
-                }
-            });
+                    } else {
+                        resultsContainer.innerHTML = '<li class="no-results">No results found</li>';
+                    }
+                });
         } else {
             resultsContainer.innerHTML = ''; // Clear results if query is empty
         }
-    });
+    }, 300); // Set debounce delay (300ms)
+});
+
 </script>
 
 

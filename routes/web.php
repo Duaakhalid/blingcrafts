@@ -4,6 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\MessageController;
+
+
+
 
 Route::get('/', [WebController::class, 'home'])->name('home');
 
@@ -25,7 +30,19 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [WebController::class, 'home'])->name('home');
 Route::get('/products', [WebController::class, 'products'])->name('products');
 Route::get('/contact', [WebController::class, 'contact'])->name('contact');
-Route::get('/cart', [WebController::class, 'cart'])->name('cart');
+/*   Route::get('/cart', [WebController::class, 'cart'])->name('cart');   */
+ 
+// Cart Routes
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart'); // Main cart page
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add'); // Add to cart route
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove'); // Remove from cart route
+Route::patch('/cart/update/{id}', [CartController::class, 'updateQuantity'])->name('cart.update');
+Route::put('/cart/update/{id}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('products', ProductController::class);
@@ -38,7 +55,12 @@ Route::get('/category/desk-needs', [WebController::class, 'deskNeeds'])->name('c
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 
-
 Route::get('/products', [WebController::class, 'products'])->name('products');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::post('/contact/submit', [MessageController::class, 'store'])->name('contact.submit');
+Route::get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages');
+
+
 require __DIR__.'/auth.php';
 ?>
